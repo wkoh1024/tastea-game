@@ -1,6 +1,7 @@
 let playerX = 50;
 let playerY = 50;
 let youtubePlayer;
+let currentBackground = 'A';
 
 function updatePlayerPosition() {
     const player = document.getElementById('player');
@@ -15,55 +16,37 @@ function checkEdgeAndChangeBackground() {
     const maxX = gameContainer.clientWidth;
     const maxY = gameContainer.clientHeight;
 
-    if (playerX < 0 || playerX > maxX - player.clientWidth || playerY < 0 || playerY > maxY - player.clientHeight) {
-        // Change background and music when the player reaches the edges
-        changeBackgroundAndMusic();
+    // change background if player passes top edge
+    if (playerY < 0 && currentBackground === 'A') {
+        changeBackground('B');
+    }
+
+    // left edge
+    if (playerX < 0 && currentBackground === 'A') {
+        changeBackground('C');
+    }
+
+    // right edge
+    if (playerX > maxX - player.clientWidth && currentBackground === 'A') {
+        changeBackground('D');
+    }
+
+    // bottom edge
+    if (playerY > maxY - player.clientHeight && currentBackground === 'A') {
+        changeBackground('E');
     }
 }
 
-function changeBackgroundAndMusic() {
-    // Dynamically set the YouTube video ID
-    const videoId = 'neV3EPgvZ3g';
+function changeBackground(newBackground) {
+    // Update the current background
+    currentBackground = newBackground;
 
-    // Create a YouTube Embedded Player
-    youtubePlayer = new YT.Player('youtube-player', {
-        height: '0',
-        width: '0',
-        videoId: videoId, // Specific video ID
-        playerVars: {
-            autoplay: 1,
-            loop: 1,
-            controls: 0,
-            showinfo: 0,
-            modestbranding: 1,
-            iv_load_policy: 3,
-        },
-        events: {
-            onReady: onPlayerReady,
-            onStateChange: onPlayerStateChange,
-        },
-    });
-}
-
-
-function onPlayerReady(event) {
-    // Player is ready, start playing
-    event.target.playVideo();
-    event.target.setVolume(0);
-}
-
-function onPlayerStateChange(event) {
-    event.target.playVideo();
-
-    // Set the volume to 50 (adjust as needed, range: 0 to 100)
-    event.target.setVolume(10);
+    // Dynamically change the background image
+    const gameContainer = document.getElementById('game-container');
+    gameContainer.style.backgroundImage = `url('background${currentBackground}.png')`;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Initialize the YouTube API
-    window.onYouTubeIframeAPIReady = function () {
-        changeBackgroundAndMusic();
-    };
 
     // Handle player movement and background changes
     document.addEventListener('keydown', function (event) {
