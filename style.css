@@ -1,6 +1,7 @@
 body {
     margin: 0;
     overflow: hidden;
+    cursor: url('./assets/gameCursor.png'), auto;
 }
 
 #game-container {
