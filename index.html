@@ -3,35 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-
-        #game-container {
-            position: relative;
-            width: 800px; 
-            height: 600px;
-            margin: auto;
-            border: 1px solid #000;
-        }
-
-        #player {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-        }
-
-        #youtube-player {
-            display: none;
-        }
-        
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Tastea</title>
 </head>
 <body>
     <div id="game-container">
-        <img id="player" src="./assets/playerSprite.png" alt="Player"> <!-- Replace 'new_sprite.png' with your sprite's file name -->
+        <img id="player" src="./assets/playerSprite.png" alt="Player"> 
+    </div>
+    <div id="toolbar">
+        <div id="slot1" class="toolbar-slot" onclick="useTool(1)"></div>
+        <div id="slot2" class="toolbar-slot" onclick="useTool(2)"></div>
+        <div id="slot3" class="toolbar-slot" onclick="useTool(3)"></div>
+        <div id="slot4" class="toolbar-slot" onclick="useTool(4)"></div>
     </div>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="game.js"></script>
