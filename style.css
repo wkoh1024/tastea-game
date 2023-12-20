@@ -21,16 +21,13 @@ body {
     height: 50px;
 }
 
-#youtube-player {
-    display: none;
-}
-
 #toolbar {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
     display: flex;
-    
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    position: relative;
+    top: -51px;
 }
 
 .toolbar-slot {
