@@ -43,7 +43,7 @@ function changeBackground(newBackground) {
 
     // Dynamically change the background image
     const gameContainer = document.getElementById('game-container');
-    gameContainer.style.backgroundImage = `url('background${currentBackground}.png')`;
+    gameContainer.style.backgroundImage = `url('./assets/background${currentBackground}.png')`;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
