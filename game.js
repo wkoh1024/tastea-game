@@ -1,47 +1,11 @@
-let playerX = 50;
-let playerY = 50;
+let playerX = 400;
+let playerY = 300;
 let youtubePlayer;
 let currentBackground = 'A';
 
-function updatePlayerPosition() {
-    const player = document.getElementById('player');
-    player.style.left = playerX + 'px';
-    player.style.top = playerY + 'px';
-}
-
-function checkEdgeAndChangeBackground() {
-    const gameContainer = document.getElementById('game-container');
-    const player = document.getElementById('player');
-
-    const maxX = gameContainer.clientWidth;
-    const maxY = gameContainer.clientHeight;
-
-    // change background if player passes top edge
-    if (playerY < 0 && currentBackground === 'A') {
-        changeBackground('B');
-    }
-
-    // left edge
-    if (playerX < 0 && currentBackground === 'A') {
-        changeBackground('C');
-    }
-
-    // right edge
-    if (playerX > maxX - player.clientWidth && currentBackground === 'A') {
-        changeBackground('D');
-    }
-
-    // bottom edge
-    if (playerY > maxY - player.clientHeight && currentBackground === 'A') {
-        changeBackground('E');
-    }
-}
-
 function changeBackground(newBackground) {
-    // Update the current background
+    // updates background to newer background
     currentBackground = newBackground;
-
-    // Dynamically change the background image
     const gameContainer = document.getElementById('game-container');
     gameContainer.style.backgroundImage = `url('./assets/background${currentBackground}.png')`;
 }
@@ -50,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Handle player movement and background changes
     document.addEventListener('keydown', function (event) {
-        const speed = 30;
+        const speed = 50;
 
         switch (event.key) {
             case 'ArrowUp':
@@ -66,8 +30,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 playerX += speed;
                 break;
         }
-
-        updatePlayerPosition();
-        checkEdgeAndChangeBackground();
+        let backgroundB, backgroundC, backgroundD, backgroundE
+        const backgroundA = new scene(backgroundC, backgroundD, backgroundB, backgroundE);
+        backgroundB = new scene(backgroundA, null, null, null);
+        backgroundC = new scene(null, backgroundA, null, null);
+        backgroundD = new scene(null, null, backgroundA, null);
+        backgroundE = new scene(null, null, null, backgroundA);
+        updateBackgroundAndPosition();
     });
 });
